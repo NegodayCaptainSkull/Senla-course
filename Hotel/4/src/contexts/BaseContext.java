@@ -32,5 +32,9 @@ public abstract class BaseContext {
         return menu.toString();
     }
 
+    protected void noSuchIndex() {
+        System.out.println("Нет такого индекса. Попробуйте еще раз");
+    }
+
     public abstract void handleInput(String operationIndex);
 }

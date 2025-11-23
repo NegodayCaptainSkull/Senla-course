@@ -26,12 +26,24 @@ public class Guest {
         return id;
     }
 
+    public String getFirstName() {
+        return firstname;
+    }
+
+    public String getLastName() {
+        return lastname;
+    }
+
     public String getFullName() {
         return firstname + " " + lastname;
     }
 
     public int getRoomNumber() {
         return roomNumber;
+    }
+
+    public List<GuestServiceUsage> getServiceUsages() {
+        return serviceUsages;
     }
 
     public String getDescription() {

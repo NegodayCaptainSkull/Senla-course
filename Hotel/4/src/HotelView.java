@@ -3,6 +3,7 @@ import enums.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class HotelView {
     public void nextDay(LocalDate currentDay) {
@@ -34,13 +35,13 @@ public class HotelView {
         }
     }
 
-    public void displaySortedAvailableRooms(List<Room> sortedAvailableRooms, RoomSort sortBy, SortDirection direction) {
+    public void displaySortedAvailableRooms(Map<String, Room> sortedAvailableRooms, RoomSort sortBy, SortDirection direction) {
         String directionText = direction.getDirection();
         System.out.println("=============Доступные комнаты отсортированные по " + sortBy + " по " + directionText);
         displayRooms(sortedAvailableRooms);
     }
 
-    public void displaySortedRooms(List<Room> sortedRooms, RoomSort sortBy, SortDirection direction) {
+    public void displaySortedRooms(Map<String, Room> sortedRooms, RoomSort sortBy, SortDirection direction) {
         String directionText = direction.getDirection();
         System.out.println("===========Все комнаты отсортированные по " + sortBy + " по " + directionText);
         displayRooms(sortedRooms);
@@ -59,9 +60,9 @@ public class HotelView {
         System.out.println("=======================");
     }
 
-    public void displayAvailableRoomsByDate(List<Room> availableRoomsByDate, LocalDate date) {
+    public void displayAvailableRoomsByDate(Map<String, Room> availableRoomsByDate, LocalDate date) {
         System.out.println("===========Список доступных комнат на " + getFormattedDate(date));
-        for (Room room : availableRoomsByDate) {
+        for (Room room : availableRoomsByDate.values()) {
             System.out.println(room.getDescription());
         }
         System.out.println("================");
@@ -156,13 +157,27 @@ public class HotelView {
         System.out.println("Гостю " + fullname + " была добавлена услуга с id: " + serviceId);
     }
 
+    public void displayExportSuccess(String entityType, String filePath) {
+        System.out.println(entityType + " успешно экспортированы в файл: " + filePath);
+    }
+
+    public void displayImportSuccess(String entityType, String filePath, int count) {
+        System.out.println(entityType + " успешно импортированы из файла: " + filePath);
+        System.out.println("   Загружено записей: " + count);
+    }
+
+    public void displayError(String message) {
+        System.out.println("Ошибка: " + message);
+        System.out.println("Пожалуйста, попробуйте снова.");
+    }
+
     private String getFormattedDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return date.format(formatter);
     }
 
-    private void displayRooms(List<Room> roomsToDisplay) {
-        roomsToDisplay.forEach(room -> {
+    private void displayRooms(Map<String, Room> roomsToDisplay) {
+        roomsToDisplay.values().forEach(room -> {
             System.out.println(room.getDescription());
         });
     }

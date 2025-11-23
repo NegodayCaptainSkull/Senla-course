@@ -137,8 +137,4 @@ public class GuestManagementContext extends BaseContext {
         System.out.println("Сортировка по:\n1. Возрастанию\n2. Убыванию");
         return scanner.nextLine();
     }
-
-    private void noSuchIndex() {
-        System.out.println("Нет такого индекса. Попробуйте еще раз");
-    }
 }

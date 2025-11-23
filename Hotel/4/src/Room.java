@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
+    private String id;
     private int number;
     private RoomType type;
     private int price;
@@ -13,11 +14,11 @@ public class Room {
     private RoomStatus status;
     private List<Guest> guests;
     private List<List<Guest>> previousGuests;
-    private LocalDate startDate;
     private LocalDate endDate;
     private int daysUnderStatus;
 
-    public Room(int number, RoomType type, int price, int capacity) {
+    public Room(String roomId, int number, RoomType type, int price, int capacity) {
+        this.id = roomId;
         this.number = number;
         this.type = type;
         this.price = price;
@@ -25,9 +26,12 @@ public class Room {
         this.status = RoomStatus.AVAILABLE;
         this.guests = new ArrayList<>();
         this.previousGuests = new ArrayList<>();
-        this.startDate = LocalDate.now();
         this.endDate = LocalDate.now();
         this.daysUnderStatus = 0;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getNumber() {
@@ -70,6 +74,10 @@ public class Room {
         return endDate;
     }
 
+    public int getDaysUnderStatus() {
+        return daysUnderStatus;
+    }
+
     public List<List<Guest>> getPreviousGuests() {
         return previousGuests;
     }
@@ -100,7 +108,7 @@ public class Room {
             return false;
         }
 
-        for (Guest guest : guests) {;
+        for (Guest guest : guests) {
             guest.setRoomNumber(0);
         }
 
@@ -142,7 +150,7 @@ public class Room {
             return false;
         }
         this.status = RoomStatus.AVAILABLE;
-        this.daysUnderStatus = 0;
+        setDaysUnderStatus(0);
         return true;
     }
 
@@ -157,6 +165,18 @@ public class Room {
         System.out.println("Цена номера " + number + " изменена на " + newPrice + " за сутки");
     }
 
+    public void setDaysUnderStatus(int days) {
+        this.daysUnderStatus = days;
+    }
+
+    public void setStatus(RoomStatus status) {
+        this.status = status;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     private void addPreviousGuests(List<Guest> guests) {
         if (previousGuests.size() == 3) {
             previousGuests.removeLast();
@@ -166,7 +186,6 @@ public class Room {
     }
 
     private void setStatusDates(LocalDate startDate, int days) {
-        this.startDate = startDate;
         this.daysUnderStatus = days;
         this.endDate = startDate.plusDays(days);
     }

@@ -316,8 +316,4 @@ public class RoomManagementContext extends BaseContext{
             }
         }
     }
-
-    private void noSuchIndex() {
-        System.out.println("Нет такого индекса. Попробуйте еще раз");
-    }
 }

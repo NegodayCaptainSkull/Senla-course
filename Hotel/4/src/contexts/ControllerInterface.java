@@ -31,4 +31,10 @@ public interface ControllerInterface {
     void setServicePrice(String serviceId, int servicePrice);
     void addNewService(String name, int price, String description);
     void addServiceToGuest(String guestId, String serviceId);
+    void importGuests(String filePath);
+    void exportGuests(String filePath);
+    void importRooms(String filePath);
+    void exportRooms(String filePath);
+    void importServices(String filePath);
+    void exportServices(String filePath);
 }

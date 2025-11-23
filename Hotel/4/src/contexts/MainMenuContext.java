@@ -13,6 +13,7 @@ public class MainMenuContext extends BaseContext{
           "Управление гостями",
           "Управление услугами",
           "Следующий день",
+          "Импорт/экспорт",
           "Выход"
         );
 
@@ -35,6 +36,8 @@ public class MainMenuContext extends BaseContext{
                 controller.nextDay();
                 break;
             case "5":
+                controller.setContext(new ImportExportContext(controller));
+            case "6":
                 break;
             default:
                 System.out.println("Такого кода нет. Попробуйте еще раз");
