@@ -5,40 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="131864da-8b05-43fc-9442-53ce735e091e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/config/LiquibaseConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/001-update-rooms-price.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/001-create-rooms-table.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/003-create-services-table.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/005-create-room-guest-history-table.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/006-insert-initial-data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/db.changelog-master.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ContextFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ContextFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ExitContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ExitContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/GuestManagementContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/GuestManagementContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ImportExportContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ImportExportContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/MainMenuContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/MainMenuContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/RoomManagementContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/RoomManagementContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ServiceManagementContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/contexts/ServiceManagementContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/GuestCSVConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/GuestCSVConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelModel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelModel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelView.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/HotelView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/RoomCSVConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/RoomCSVConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/ServiceCSVConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/ServiceCSVConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/config/LiquibaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/config/LiquibaseConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/hotel/ServiceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/hotel/ServiceRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/hotel/connection/EntityManagerProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/java/hotel/connection/EntityManagerProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/changes/001-update-rooms-price.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/db/changelog/changes/001-update-rooms-price.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/ServiceRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/ServiceRegistry.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/connection/EntityManagerProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/connection/EntityManagerProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/AbstractJpaDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/AbstractJpaDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/GuestDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/GuestDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/GuestServiceUsageDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/GuestServiceUsageDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/RoomDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/RoomDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/RoomGuestHistoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/RoomGuestHistoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/ServiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/dao/ServiceDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/service/HotelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/hotel-core/target/classes/hotel/service/HotelService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel_state.ser" beforeDir="false" afterPath="$PROJECT_DIR$/hotel_state.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/scripts/setup-database.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/scripts/setup-database.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel/scripts/setup-database.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel/scripts/setup-database.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/hotel.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/hotel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,24 +49,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Greeting.executor": "Run",
-    "Application.HotelApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "task-15",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/georgemk/Documents/Projects/Java/Senla",
-    "onboarding.tips.debug.path": "/Users/georgemk/Documents/Projects/Java/Senla/Hotel/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Greeting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HotelApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;task-15&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/georgemk/Documents/Projects/Java/Senla&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/georgemk/Documents/Projects/Java/Senla/Hotel/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Hotel/hotel-core/src/main/java" />

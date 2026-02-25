@@ -3,12 +3,14 @@ package hotel;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@DependsOn("liquibase")
 public class ServiceRegistry {
 
     private final Map<String, Service> services = new HashMap<>();
