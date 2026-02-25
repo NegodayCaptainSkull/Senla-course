@@ -14,11 +14,7 @@ import java.util.stream.Collectors;
 @Component
 public class RoomCSVConverter implements CSVService.CSVConverter<RoomWithGuestsDto> {
 
-    private final ServiceRegistry serviceRegistry;
-
-    @Autowired
-    public RoomCSVConverter(ServiceRegistry serviceRegistry) {
-        this.serviceRegistry = serviceRegistry;
+    public RoomCSVConverter() {
     }
 
     @Override

@@ -1,6 +1,7 @@
 package hotel;
 
 import hotel.dto.GuestWithServicesDto;
+import hotel.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +13,11 @@ import java.util.stream.Collectors;
 @Component
 public class GuestCSVConverter implements CSVService.CSVConverter<GuestWithServicesDto> {
 
-    private final ServiceRegistry serviceRegistry;
+    private final ServiceService serviceService;
 
     @Autowired
-    public GuestCSVConverter(ServiceRegistry serviceRegistry) {
-        this.serviceRegistry = serviceRegistry;
+    public GuestCSVConverter(ServiceService serviceService) {
+        this.serviceService = serviceService;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class GuestCSVConverter implements CSVService.CSVConverter<GuestWithServi
                     String serviceId = serviceData[0];
                     LocalDate usageDate = LocalDate.parse(serviceData[1]);
 
-                    Service service = serviceRegistry.getServiceById(serviceId);
+                    Service service = serviceService.getServiceById(serviceId);
                     if (service != null) {
                         GuestServiceUsage usage = new GuestServiceUsage(service, usageDate, guest);
                         usages.add(usage);

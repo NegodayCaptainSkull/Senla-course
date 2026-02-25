@@ -1,13 +1,13 @@
 package enums;
 
-public enum ServiceSort {
+public enum UsageServiceSort {
 
-    ID("идентификатору"),
-    PRICE("цене");
+    PRICE("цене"),
+    DATE("дате");
 
     private final String sorBy;
 
-    ServiceSort(String sortBy) {
+    UsageServiceSort(String sortBy) {
         this.sorBy = sortBy;
     }
 
