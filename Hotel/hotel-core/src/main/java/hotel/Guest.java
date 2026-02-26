@@ -20,8 +20,8 @@ public class Guest implements Serializable {
     private String firstname;
     @Column(name = "lastname", nullable = false)
     private String lastname;
-    @Column(name = "room_number", nullable = false)
-    private int roomNumber;
+    @Column(name = "room_number")
+    private Integer roomNumber;
 
     public Guest() {  }
 
@@ -29,7 +29,7 @@ public class Guest implements Serializable {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.roomNumber = -1;
+        this.roomNumber = null;
     }
 
     public String getId() {
@@ -48,7 +48,7 @@ public class Guest implements Serializable {
         return firstname + " " + lastname;
     }
 
-    public int getRoomNumber() {
+    public Integer getRoomNumber() {
         return roomNumber;
     }
 

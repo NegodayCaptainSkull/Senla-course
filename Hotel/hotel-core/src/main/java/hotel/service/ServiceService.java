@@ -14,6 +14,7 @@ import java.util.List;
 @org.springframework.stereotype.Service
 @Transactional(readOnly = true)
 public class ServiceService {
+
     private ServiceDao serviceDao;
 
     @Autowired

@@ -4,7 +4,11 @@ import enums.GuestSort;
 import enums.UsageServiceSort;
 import enums.SortDirection;
 import exceptions.DaoException;
-import hotel.*;
+import hotel.Guest;
+import hotel.Service;
+import hotel.Room;
+import hotel.GuestServiceUsage;
+import hotel.GuestData;
 import hotel.dao.GuestDao;
 import hotel.dao.GuestServiceUsageDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Service
 @Transactional(readOnly = true)
 public class GuestService {
+
     private GuestDao guestDao;
     private GuestServiceUsageDao usageDao;
     private RoomService roomService;

@@ -9,7 +9,14 @@ import hotel.service.ImportExportService;
 import hotel.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +24,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/services")
 public class ServiceController {
+
     private final DtoMapper dtoMapper;
     private final ServiceService serviceService;
     private final ImportExportService importExportService;
@@ -29,7 +37,7 @@ public class ServiceController {
     }
 
     @GetMapping
-    public List<?> getServices(@RequestParam(required = false) ServiceSort sortBy, SortDirection direction) {
+    public List<?> getServices(@RequestParam(required = false) ServiceSort sortBy, @RequestParam(required = false) SortDirection direction) {
         if (sortBy != null) {
             return dtoMapper.toServiceDtoList(serviceService.getSortedServices(sortBy, direction));
         }

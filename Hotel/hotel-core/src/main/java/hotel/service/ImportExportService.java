@@ -2,7 +2,14 @@ package hotel.service;
 
 import enums.RoomStatus;
 import exceptions.ImportExportException;
-import hotel.*;
+import hotel.RoomCSVConverter;
+import hotel.ServiceCSVConverter;
+import hotel.GuestCSVConverter;
+import hotel.Guest;
+import hotel.Service;
+import hotel.Room;
+import hotel.CSVService;
+import hotel.GuestServiceUsage;
 import hotel.dto.GuestWithServicesDto;
 import hotel.dto.RoomWithGuestsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +24,7 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Service
 @Transactional(readOnly = true)
 public class ImportExportService {
+
     private final RoomService roomService;
     private final GuestService guestService;
     private final ServiceService serviceService;
@@ -105,7 +113,7 @@ public class ImportExportService {
                     .collect(Collectors.toList());
 
             if (room.getStatus() == RoomStatus.AVAILABLE) {
-                if (hotelFacade.checkIn(guests, roomNumber, 1)) {
+                if (!hotelFacade.checkIn(guests, roomNumber, 1).isEmpty()) {
                     saveGuestServices(roomDtos);
                 } else {
                     isErrorOccurred = true;
@@ -147,7 +155,6 @@ public class ImportExportService {
         }
 
         CSVService.exportToCSV(guestsWithServices, filePath, guestCSVConverter);
-
     }
 
     @Transactional

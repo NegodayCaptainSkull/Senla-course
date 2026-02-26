@@ -1,6 +1,7 @@
 package hotel.dto;
 
 public class GuestDto {
+
     private String id;
     private String firstname;
     private String lastname;

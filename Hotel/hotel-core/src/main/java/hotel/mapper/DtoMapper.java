@@ -4,15 +4,19 @@ import hotel.Guest;
 import hotel.Room;
 import hotel.Service;
 import hotel.dto.GuestDto;
+import hotel.dto.GuestRequest;
 import hotel.dto.RoomDto;
 import hotel.dto.ServiceDto;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class DtoMapper {
+
     public RoomDto toRoomDto(Room room) {
         return new RoomDto(
                 room.getNumber(),
@@ -59,6 +63,10 @@ public class DtoMapper {
         return new Guest(dto.getId(), dto.getFirstname(), dto.getLastname());
     }
 
+    public Guest requestToGuest(GuestRequest dto) {
+        return new Guest(null, dto.getFirstname(), dto.getLastname());
+    }
+
     public GuestDto toGuestDto(Guest guest) {
         return new GuestDto(guest.getId(), guest.getFirstName(), guest.getLastName(), guest.getRoomNumber());
     }
@@ -72,5 +80,4 @@ public class DtoMapper {
 
         return guestsDto;
     }
-
 }

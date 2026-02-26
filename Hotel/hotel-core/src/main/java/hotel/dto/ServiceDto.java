@@ -1,6 +1,7 @@
 package hotel.dto;
 
 public class ServiceDto {
+
     private String id;
     private String name;
     private Integer price;

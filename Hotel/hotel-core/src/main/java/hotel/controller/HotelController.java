@@ -1,5 +1,6 @@
 package hotel.controller;
 
+import hotel.service.HotelServiceFacade;
 import hotel.service.HotelState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/hotel")
 public class HotelController {
+
     private final HotelState hotelState;
+    private final HotelServiceFacade hotelService;
 
     @Autowired
-    public HotelController(HotelState hotelState) {
+    public HotelController(HotelState hotelState, HotelServiceFacade hotelService) {
         this.hotelState = hotelState;
+        this.hotelService = hotelService;
     }
 
     @GetMapping("/date")
@@ -28,7 +32,7 @@ public class HotelController {
 
     @PostMapping("/next-day")
     public Map<String, LocalDate> nextDay() {
-        LocalDate newDay = hotelState.nextDay();
+        LocalDate newDay = hotelService.nextDay();
         return Map.of("currentDay", newDay);
     }
 

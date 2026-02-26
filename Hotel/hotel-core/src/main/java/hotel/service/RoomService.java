@@ -3,15 +3,20 @@ package hotel.service;
 import enums.RoomSort;
 import enums.SortDirection;
 import exceptions.DaoException;
-import hotel.*;
+import hotel.Room;
+import hotel.HotelConfig;
+import hotel.RoomGuestHistory;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import hotel.dao.RoomDao;
 import hotel.dao.RoomGuestHistoryDao;
-import hotel.dto.RoomWithGuestsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,18 +24,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class RoomService {
+
     private final RoomDao roomDao;
     private final RoomGuestHistoryDao historyDao;
     private final HotelState hotelState;
-    private final GuestService guestService;
 
-    private HotelConfig config;
+    private final HotelConfig config;
 
     @Autowired
-    public RoomService(RoomDao roomDao, RoomGuestHistoryDao historyDao, HotelState hotelState, GuestService guestService, HotelConfig config) {
+    public RoomService(RoomDao roomDao, RoomGuestHistoryDao historyDao, HotelState hotelState, HotelConfig config) {
         this.roomDao = roomDao;
         this.hotelState = hotelState;
-        this.guestService = guestService;
         this.historyDao = historyDao;
         this.config = config;
     }
@@ -49,27 +53,6 @@ public class RoomService {
 
     public boolean isRoomExists(int roomNumber) {
         return getRoomByNumber(roomNumber) != null;
-    }
-
-    public String getRoomInformation(int roomNumber) {
-        Room room = getRoomByNumber(roomNumber);
-        List<Guest> guests = guestService.getGuestsByRoom(roomNumber);
-
-        StringBuilder info = new StringBuilder();
-        info.append("Номер ").append(room.getNumber())
-                .append(" тип: ").append(room.getType())
-                .append("\nСтоимость: ").append(room.getPrice())
-                .append(" вместимость: ").append(room.getCapacity())
-                .append("\nСтатус: ").append(room.getStatus());
-
-        if (!guests.isEmpty()) {
-            info.append("\nГости:");
-            for (Guest guest : guests) {
-                info.append("\n  - ").append(guest.getInformation());
-            }
-        }
-
-        return info.toString();
     }
 
     @Transactional
@@ -168,37 +151,11 @@ public class RoomService {
         return availableRoomsByDate;
     }
 
-    public List<RoomWithGuestsDto> getSortedRooms(RoomSort sortBy, SortDirection direction) {
-        List<Room> rooms = getAllRooms();
-        Map<Integer, Room> sortedRooms = sortRooms(rooms, sortBy, direction);
-
-        List<RoomWithGuestsDto> result = new ArrayList<>();
-        for (Room room : sortedRooms.values()) {
-            List<Guest> guests = guestService.getGuestsByRoom(room.getNumber());
-            result.add(new RoomWithGuestsDto(room, guests));
-        }
-
-        return result;
-    }
-
-    public List<RoomWithGuestsDto> getSortedAvailableRooms(RoomSort sortBy, SortDirection direction) {
-        List<Room> rooms = getAvailableRooms();
-        Map<Integer, Room> sortedRooms = sortRooms(rooms, sortBy, direction);
-
-        List<RoomWithGuestsDto> result = new ArrayList<>();
-        for (Room room : sortedRooms.values()) {
-            List<Guest> guests = guestService.getGuestsByRoom(room.getNumber());
-            result.add(new RoomWithGuestsDto(room, guests));
-        }
-
-        return result;
-    }
-
     public List<List<RoomGuestHistory>> getRoomHistory(int roomNumber) {
         return historyDao.getPreviousGuestGroups(roomNumber, config.getRoomHistorySize());
     }
 
-    private Map<Integer, Room> sortRooms(List<Room> roomsToSort, RoomSort sortBy, SortDirection direction) {
+    public Map<Integer, Room> sortRooms(List<Room> roomsToSort, RoomSort sortBy, SortDirection direction) {
         Comparator<Room> comparator = switch (sortBy) {
             case RoomSort.PRICE -> Comparator.comparingInt(Room::getPrice);
             case RoomSort.CAPACITY -> Comparator.comparingInt(Room::getCapacity);

@@ -7,7 +7,6 @@ import hotel.Room;
 import hotel.RoomGuestHistory;
 import hotel.dto.CheckInRequest;
 import hotel.dto.RoomDto;
-import hotel.dto.RoomWithGuestsDto;
 import hotel.mapper.DtoMapper;
 import hotel.service.GuestService;
 import hotel.service.HotelServiceFacade;
@@ -25,12 +24,16 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
+
     private final RoomService roomService;
     private final GuestService guestService;
     private final DtoMapper dtoMapper;
@@ -51,7 +54,7 @@ public class RoomController {
     public List<?> getAllRooms(@RequestParam(required = false) RoomSort sortBy, @RequestParam(required = false) SortDirection direction) {
         List<?> rooms;
         if (sortBy != null) {
-            rooms = roomService.getSortedRooms(sortBy, direction);
+            rooms = hotelFacade.getSortedRooms(sortBy, direction);
         } else {
             rooms = roomService.getAllRooms();
         }
@@ -60,10 +63,10 @@ public class RoomController {
     }
 
     @GetMapping("/available")
-    public List<?> getAvailableRooms(@RequestParam RoomSort sortBy, SortDirection direction) {
+    public List<?> getAvailableRooms(@RequestParam(required = false) RoomSort sortBy, @RequestParam(required = false) SortDirection direction) {
         List<?> rooms;
         if (sortBy != null) {
-            rooms = roomService.getSortedAvailableRooms(sortBy, direction);
+            rooms = hotelFacade.getSortedAvailableRooms(sortBy, direction);
         } else {
             rooms = roomService.getAvailableRooms();
         }
@@ -84,7 +87,7 @@ public class RoomController {
 
     @GetMapping("/information/{roomNumber}")
     public String getRoomInformation(@PathVariable int roomNumber) {
-        return roomService.getRoomInformation(roomNumber);
+        return hotelFacade.getRoomInformation(roomNumber);
     }
 
     @PatchMapping("/{roomNumber}/price")
@@ -127,14 +130,18 @@ public class RoomController {
     @PostMapping("/{roomNumber}/checkIn")
     public ResponseEntity<Map<String, Object>> checkIn(@PathVariable int roomNumber, @RequestBody CheckInRequest request) {
         List<Guest> guests = request.getGuests().stream()
-                .map(dtoMapper::toGuest).toList();
+                .map(dtoMapper::requestToGuest).toList();
 
-        boolean success = hotelFacade.checkIn(guests, roomNumber, request.getDays());
 
-        return ResponseEntity.ok(Map.of(
-                "success", success,
-                "roomNumber", roomNumber
-        ));
+        List<Guest> checkedIn = hotelFacade.checkIn(guests, roomNumber, request.getDays());
+        boolean success = !checkedIn.isEmpty();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", success);
+        response.put("roomNumber", roomNumber);
+        response.put("guests", dtoMapper.toGuestDtoList(checkedIn));
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{roomNumber}/checkOut")
