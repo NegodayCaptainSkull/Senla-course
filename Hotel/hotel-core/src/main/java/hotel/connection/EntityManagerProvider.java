@@ -1,5 +1,6 @@
 package hotel.connection;
 
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Component
+@DependsOn("liquibase")
 public class EntityManagerProvider {
 
     private static final Logger logger = LogManager.getLogger(EntityManagerProvider.class);

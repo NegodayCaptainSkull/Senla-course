@@ -7,16 +7,13 @@ DB_NAME="hotel_db"
 APP_USER="hotel_app"
 APP_PASSWORD="hotel_password"
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SQL_DIR="$SCRIPT_DIR/../sql"
-
 read -p "Администратор PostgreSQL: " DB_ADMIN
 read -sp "Пароль администратора: " DB_ADMIN_PASSWORD
 echo
 
 export PGPASSWORD="$DB_ADMIN_PASSWORD"
 
-echo "[1/4] Создание пользователя приложения..."
+echo "[1/2] Создание пользователя..."
 psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN" -d postgres -v ON_ERROR_STOP=1 <<SQL
 DO \$\$
 BEGIN
@@ -29,26 +26,17 @@ END
 \$\$;
 SQL
 
-echo "[2/4] Создание базы данных..."
+echo "[2/2] Создание базы данных..."
 psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN" -d postgres -v ON_ERROR_STOP=1 \
   -c "DROP DATABASE IF EXISTS $DB_NAME;"
 psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN" -d postgres -v ON_ERROR_STOP=1 \
   -c "CREATE DATABASE $DB_NAME OWNER $APP_USER;"
 
-echo "[3/4] Создание структуры..."
-export PGPASSWORD="$APP_PASSWORD"
-psql -h "$DB_HOST" -p "$DB_PORT" -U "$APP_USER" -d "$DB_NAME" -v ON_ERROR_STOP=1 \
-  -f "$SQL_DIR/schema.sql"
-
-echo "[4/4] Загрузка тестовых данных..."
-psql -h "$DB_HOST" -p "$DB_PORT" -U "$APP_USER" -d "$DB_NAME" -v ON_ERROR_STOP=1 \
-  -f "$SQL_DIR/data.sql"
-
 unset PGPASSWORD
 
 echo ""
 echo "========================================="
-echo "База данных создана!"
+echo "Пустая БД создана!"
 echo "========================================="
 echo "Подключение для приложения:"
 echo "  Host:     $DB_HOST"
