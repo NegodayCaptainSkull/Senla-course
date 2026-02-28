@@ -2,8 +2,8 @@ package enums;
 
 public enum ServiceSort {
 
-    PRICE("цене"),
-    DATE("дате");
+    ID("идентификатору"),
+    PRICE("цене");
 
     private final String sorBy;
 

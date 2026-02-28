@@ -23,7 +23,7 @@ CREATE TABLE guests (
     id varchar(4) PRIMARY KEY DEFAULT 'G' || nextval('guests_seq'),
     firstname varchar(20) NOT NULL ,
     lastname varchar(20) NOT NULL ,
-    room_number int NOT NULL
+    room_number INTEGER
 );
 
 CREATE TABLE guest_service_usage (

@@ -1,15 +1,14 @@
 package hotel.dao;
 
 import exceptions.DaoException;
-import hotel.connection.EntityManagerProvider;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +24,8 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     protected static final String ERROR_DELETE = "Ошибка удаления сущности: ";
     protected static final String ERROR_COUNT = "Ошибка подсчёта записей";
 
-    @Autowired
-    protected EntityManagerProvider entityManagerProvider;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     protected AbstractJpaDao() {
     }
@@ -34,14 +33,13 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     protected abstract Class<T> getEntityClass();
 
     protected EntityManager getEntityManager() {
-        return entityManagerProvider.getEntityManager();
+        return entityManager;
     }
 
     @Override
     public Optional<T> findById(K id) {
         try {
-            EntityManager em = getEntityManager();
-            T entity = em.find(getEntityClass(), id);
+            T entity = entityManager.find(getEntityClass(), id);
             return Optional.ofNullable(entity);
         } catch (Exception e) {
             logger.error(ERROR_FIND_BY_ID + id, e);
@@ -52,12 +50,11 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     @Override
     public List<T> findAll() {
         try {
-            EntityManager em = getEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
             CriteriaQuery<T> query = cb.createQuery(getEntityClass());
             Root<T> root = query.from(getEntityClass());
             query.select(root);
-            return em.createQuery(query).getResultList();
+            return entityManager.createQuery(query).getResultList();
         } catch (Exception e) {
             logger.error(ERROR_FIND_ALL, e);
             throw new DaoException(ERROR_FIND_ALL, e);
@@ -67,9 +64,8 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     @Override
     public T save(T entity) {
         try {
-            EntityManager em = getEntityManager();
-            em.persist(entity);
-            em.flush();
+            entityManager.persist(entity);
+            entityManager.flush();
             logger.debug("Сущность сохранена: {}", entity);
             return entity;
         } catch (Exception e) {
@@ -81,9 +77,8 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     @Override
     public T update(T entity) {
         try {
-            EntityManager em = getEntityManager();
-            T merged = em.merge(entity);
-            em.flush();
+            T merged = entityManager.merge(entity);
+            entityManager.flush();
             logger.debug("Сущность обновлена: {}", merged);
             return merged;
         } catch (Exception e) {
@@ -95,11 +90,10 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     @Override
     public boolean delete(K id) {
         try {
-            EntityManager em = getEntityManager();
-            T entity = em.find(getEntityClass(), id);
+            T entity = entityManager.find(getEntityClass(), id);
             if (entity != null) {
-                em.remove(entity);
-                em.flush();
+                entityManager.remove(entity);
+                entityManager.flush();
                 logger.debug("Сущность удалена с ID: {}", id);
                 return true;
             }
@@ -113,12 +107,11 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
     @Override
     public long count() {
         try {
-            EntityManager em = getEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
             CriteriaQuery<Long> query = cb.createQuery(Long.class);
             Root<T> root = query.from(getEntityClass());
             query.select(cb.count(root));
-            return em.createQuery(query).getSingleResult();
+            return entityManager.createQuery(query).getSingleResult();
         } catch (Exception e) {
             logger.error(ERROR_COUNT, e);
             throw new DaoException(ERROR_COUNT, e);
@@ -127,8 +120,7 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
 
     protected List<T> executeQuery(String jpql, Object... params) {
         try {
-            EntityManager em = getEntityManager();
-            TypedQuery<T> query = em.createQuery(jpql, getEntityClass());
+            TypedQuery<T> query = entityManager.createQuery(jpql, getEntityClass());
             for (int i = 0; i < params.length; i++) {
                 query.setParameter(i + 1, params[i]);
             }
@@ -141,8 +133,7 @@ public abstract class AbstractJpaDao<T, K> implements GenericDao<T, K> {
 
     protected <R> List<R> executeTypedQuery(String jpql, Class<R> resultClass, Object... params) {
         try {
-            EntityManager em = getEntityManager();
-            TypedQuery<R> query = em.createQuery(jpql, resultClass);
+            TypedQuery<R> query = entityManager.createQuery(jpql, resultClass);
             for (int i = 0; i < params.length; i++) {
                 query.setParameter(i + 1, params[i]);
             }

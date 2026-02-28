@@ -3,7 +3,6 @@ package hotel;
 import enums.RoomStatus;
 import enums.RoomType;
 import hotel.dto.RoomWithGuestsDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -14,11 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class RoomCSVConverter implements CSVService.CSVConverter<RoomWithGuestsDto> {
 
-    private final ServiceRegistry serviceRegistry;
-
-    @Autowired
-    public RoomCSVConverter(ServiceRegistry serviceRegistry) {
-        this.serviceRegistry = serviceRegistry;
+    public RoomCSVConverter() {
     }
 
     @Override
